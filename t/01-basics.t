@@ -1,30 +1,30 @@
 use v6;
-use Vector;
+use Math::Vector;
 use Test;
 
 plan *;
 
-my $v1 = Vector.new(1, 2, 3);
-my Vector $v2 = Vector.new(3, 4, 0);
+my $v1 = Math::Vector.new(1, 2, 3);
+my Math::Vector $v2 = Math::Vector.new(3, 4, 0);
 my @v3 = (-1, 0, 2);
-my Vector $v3 = Vector.new(@v3);
-my Vector $origin3d = Vector.new(0, 0, 0);
-my Vector $v5 = Vector.new(1,2,3,4,5);
-my Vector $v6 = Vector.new(0,0,1,0,0);
-my Vector $v7 = Vector.new(1,0,0,0,0,0,0);
-my Vector $v8 = Vector.new(0,1,0,0,0,0,0);
-my Vector $v9 = Vector.new(1..7);
-my Vector $v10 = Vector.new(10,20,1,10,20,10,30);
-my Vector $vcrazy = Vector.new(Vector.new(1, 2, 3), Vector.new(-1, 0, -1));
+my Math::Vector $v3 = Math::Vector.new(@v3);
+my Math::Vector $origin3d = Math::Vector.new(0, 0, 0);
+my Math::Vector $v5 = Math::Vector.new(1,2,3,4,5);
+my Math::Vector $v6 = Math::Vector.new(0,0,1,0,0);
+my Math::Vector $v7 = Math::Vector.new(1,0,0,0,0,0,0);
+my Math::Vector $v8 = Math::Vector.new(0,1,0,0,0,0,0);
+my Math::Vector $v9 = Math::Vector.new(1..7);
+my Math::Vector $v10 = Math::Vector.new(10,20,1,10,20,10,30);
+my Math::Vector $vcrazy = Math::Vector.new(Math::Vector.new(1, 2, 3), Math::Vector.new(-1, 0, -1));
 
 my @vectors = ($v1, $v2, $v3, $origin3d, $v5, $v6, $v7, $v8, $v9, $v10);
 
-isa_ok($v1, Vector, "Variable is of type Vector");
-isa_ok($v2, Vector, "Variable is of type Vector");
-isa_ok($v3, Vector, "Variable is of type Vector");
-isa_ok($v5, Vector, "Variable is of type Vector");
-isa_ok($v7, Vector, "Variable is of type Vector");
-isa_ok($vcrazy, Vector, "Variable is of type Vector");
+isa_ok($v1, Math::Vector, "Variable is of type Math::Vector");
+isa_ok($v2, Math::Vector, "Variable is of type Math::Vector");
+isa_ok($v3, Math::Vector, "Variable is of type Math::Vector");
+isa_ok($v5, Math::Vector, "Variable is of type Math::Vector");
+isa_ok($v7, Math::Vector, "Variable is of type Math::Vector");
+isa_ok($vcrazy, Math::Vector, "Variable is of type Math::Vector");
 
 is(~$v1, "(1, 2, 3)", "Stringify works");
 is(~$v3, "(-1, 0, 2)", "Stringify works");
@@ -36,11 +36,11 @@ is(~eval($v1.perl), ~$v1, ".perl works");
 is(~eval($v9.perl), ~$v9, ".perl works");
 is(~eval($vcrazy.perl), ~$vcrazy, ".perl works");
 
-is($v1.Dim, 3, "Dim works for 3D Vector");
-is($v5.Dim, 5, "Dim works for 5D Vector");
-is($v7.Dim, 7, "Dim works for 7D Vector");
+is($v1.Dim, 3, "Dim works for 3D Math::Vector");
+is($v5.Dim, 5, "Dim works for 5D Math::Vector");
+is($v7.Dim, 7, "Dim works for 7D Math::Vector");
 
-is_approx($v7 ⋅ $v8, 0, "Perpendicular vectors have 0 dot product");
+is_approx($v7 ⋅ $v8, 0, "Perpendicular Math::Vectors have 0 dot product");
 
 
 #basic math tests
@@ -51,7 +51,7 @@ is(($v1 + $v2) + $v3, $v1 + ($v2 + $v3), "Addition is associative");
 is($v1 + $origin3d, $v1, "Addition with origin leaves original");
 
 # {
-#     my Vector $a = $v1;
+#     my Math::Vector $a = $v1;
 #     $a += $v2;
 #     is(~($v1 + $v2), ~$a, "+= works");
 # }
@@ -63,7 +63,7 @@ is($v1 - $origin3d, $v1, "Subtracting the origin leaves original");
 is(-$origin3d, $origin3d, "Negating the origin leaves the origin");
 is(~(-$v2), "(-3, -4, 0)", "Negating works");
 # {
-#     my Vector $a = $v1;
+#     my Math::Vector $a = $v1;
 #     $a -= $v2;
 #     is(~($v1 - $v2), ~$a, "+= works");
 # }
@@ -82,22 +82,22 @@ for @vectors -> $v
 
 for @vectors -> $v
 {
-    my Vector $vn = $v * 4.5;
-    is_approx($vn.Length, $v.Length * 4.5, "Scalar by Vector multiply gets proper length");
-    is_approx_vector($vn.Unitize, $v.Unitize, "Scalar by Vector multiply gets proper direction");
-    is_approx_vector($vn, 4.5 * $v, "Scalar by Vector multiply is commutative");
+    my Math::Vector $vn = $v * 4.5;
+    is_approx($vn.Length, $v.Length * 4.5, "Scalar by Math::Vector multiply gets proper length");
+    is_approx_vector($vn.Unitize, $v.Unitize, "Scalar by Math::Vector multiply gets proper direction");
+    is_approx_vector($vn, 4.5 * $v, "Scalar by Math::Vector multiply is commutative");
 }
 
 for @vectors -> $v
 {
-    my Vector $vn = $v / 4.5;
-    is_approx($vn.Length, $v.Length / 4.5, "Vector by Scalar divide gets proper length");
-    is_approx_vector($vn.Unitize, $v.Unitize, "Vector by Scalar divide gets proper direction");
-    is_approx_vector($vn, $v * (1.0 / 4.5), "Vector by Scalar divide is equal to multiplication by reciprocal");
+    my Math::Vector $vn = $v / 4.5;
+    is_approx($vn.Length, $v.Length / 4.5, "Math::Vector by Scalar divide gets proper length");
+    is_approx_vector($vn.Unitize, $v.Unitize, "Math::Vector by Scalar divide gets proper direction");
+    is_approx_vector($vn, $v * (1.0 / 4.5), "Math::Vector by Scalar divide is equal to multiplication by reciprocal");
 }
 
 #dot product tests
-is_approx($v7 dot $v8, 0, "Perpendicular vectors have 0 dot product");
+is_approx($v7 dot $v8, 0, "Perpendicular Math::Vectors have 0 dot product");
 
 for ($v1, $v2, $v3) X ($v1, $v2, $v3) -> $x, $y
 {
@@ -121,8 +121,8 @@ dies_ok( { $v7 dot $v5 }, "You can't do dot products of different dimensions");
 # }
 
 # {
-#     my Vector $a = $v1;
-#     dies_ok( { $a ⋅= $v2; }, "You can't do dot= on a Vector variable");
+#     my Math::Vector $a = $v1;
+#     dies_ok( { $a ⋅= $v2; }, "You can't do dot= on a Math::Vector variable");
 # }
 
 #cross product tests
@@ -160,30 +160,29 @@ dies_ok( { $v5 cross $v6 }, "You can't do 5D cross products");
 #     is_approx($v1 × $v2, $a, "×= works");
 # }
 
-# UnitVector tests
-{
-    my UnitVector $a = Vector.new(1, 0, 0);
-#    isa_ok($a, UnitVector, "Variable is of type UnitVector"); 
-    isa_ok($a, Vector, "Variable is of type Vector");
-}
+# Math::UnitVector tests
+# {
+#     my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
+#     isa_ok($a, Math::Vector, "Variable is of type Math::Vector");
+# }
 
 # {
-#     my UnitVector $a = UnitVector.new(1, 0, 0);
+#     my Math::UnitVector $a = Math::UnitVector.new(1, 0, 0);
 #     my $b = $a;
 #     $b += $v2;
-#     is_approx($a + $v2, $b, "+= works on UnitVector");
+#     is_approx($a + $v2, $b, "+= works on Math::UnitVector");
 # }
 # {
-#     my UnitVector $a = Vector.new(1, 0, 0);
-#     dies_ok( { $a += $v2; }, "Catch if += violates the UnitVector constraint");
+#     my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
+#     dies_ok( { $a += $v2; }, "Catch if += violates the Math::UnitVector constraint");
 # }
 
 # test prefix plus
-# isa_ok(+$v1, Vector, "Prefix + works on the Vector class");
-dies_ok( { $v1.Num; }, "Make sure .Num does not work on 3D vector");
+# isa_ok(+$v1, Math::Vector, "Prefix + works on the Math::Vector class");
+dies_ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 
 # test extensions
-class VectorWithLength is Vector
+class Math::VectorWithLength is Math::Vector
 {
     has $.length;
     
@@ -203,9 +202,9 @@ class VectorWithLength is Vector
     }
 }
 
-my VectorWithLength $vl = VectorWithLength.new($v7.coordinates);
-isa_ok($vl, VectorWithLength, "Variable is of type VectorWithLength");
+my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.coordinates);
+isa_ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
 my $vlc = eval($vl.perl);
-isa_ok($vlc, VectorWithLength, "eval'd perl'd variable is of type VectorWithLength");
+isa_ok($vlc, Math::VectorWithLength, "eval'd perl'd variable is of type Math::VectorWithLength");
 
 done_testing;
