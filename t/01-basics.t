@@ -207,4 +207,4 @@ isa_ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength"
 my $vlc = eval($vl.perl);
 isa_ok($vlc, Math::VectorWithLength, "eval'd perl'd variable is of type Math::VectorWithLength");
 
-done_testing;
+done;
