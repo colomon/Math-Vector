@@ -46,9 +46,14 @@ class Math::Vector
         $a ⋅ $b;
     }
 
+    method conjugate()
+    {
+      return Math::Vector.new(@.coordinates>>.conjugate);
+    }
+
     method Length()
     {
-        sqrt(self ⋅ self);
+        sqrt(self ⋅ self.conjugate).abs;
     }
     
     multi method abs()
