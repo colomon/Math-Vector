@@ -3,6 +3,6 @@
     "version"     : "*",
     "description" : "Vector math class",
     "depends"     : [],
-    "repo-type"   : "git",
-    "repo-url"    : "git://github.com/colomon/Math-Vector.git"
+    "source-type"   : "git",
+    "source-url"    : "git://github.com/colomon/Math-Vector.git"
 }
