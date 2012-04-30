@@ -2,8 +2,6 @@ use v6;
 use Math::Vector;
 use Test;
 
-plan *;
-
 my $v1 = Math::Vector.new(1, 2, 3);
 my Math::Vector $v2 = Math::Vector.new(3, 4, 0);
 my @v3 = (-1, 0, 2);
@@ -182,29 +180,29 @@ dies_ok( { $v5 cross $v6 }, "You can't do 5D cross products");
 dies_ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 
 # test extensions
-class Math::VectorWithLength is Math::Vector
-{
-    has $.length;
-    
-    multi method new (*@x) 
-    {
-        self.bless(*, coordinates => @x, length => sqrt [+] (@x »*« @x));
-    }
-    
-    multi method new (@x) 
-    {
-        self.bless(*, coordinates => @x, length => sqrt [+] (@x »*« @x));
-    }
-    
-    submethod Length
-    {
-        $.length;
-    }
-}
-
-my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.coordinates);
-isa_ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
-my $vlc = eval($vl.perl);
-isa_ok($vlc, Math::VectorWithLength, "eval'd perl'd variable is of type Math::VectorWithLength");
+# class Math::VectorWithLength is Math::Vector
+# {
+#     has $.length;
+#     
+#     multi method new (*@x) 
+#     {
+#         self.bless(*, coordinates => @x, length => sqrt [+] (@x »*« @x));
+#     }
+#     
+#     multi method new (@x) 
+#     {
+#         self.bless(*, coordinates => @x, length => sqrt [+] (@x »*« @x));
+#     }
+#     
+#     submethod Length
+#     {
+#         $.length;
+#     }
+# }
+# 
+# my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.coordinates);
+# isa_ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
+# my $vlc = eval($vl.perl);
+# isa_ok($vlc, Math::VectorWithLength, "eval'd perl'd variable is of type Math::VectorWithLength");
 
 done;

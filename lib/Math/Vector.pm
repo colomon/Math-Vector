@@ -16,14 +16,14 @@ class Math::Vector
         self.bless(*, coordinates => @x);
     }
     
-    our Str multi method Str() 
+    multi method Str() 
     {
         "(" ~ @.coordinates.join(', ') ~ ")";
     }
     
-    our Str multi method perl()
+    multi method perl()
     {
-        self.WHAT.perl ~ ".new(" ~ @.coordinates.map({.perl}).join(', ') ~ ")";        
+        "Math::Vector.new(" ~ @.coordinates.map({.perl}).join(', ') ~ ")";        
     }
     
     multi method Num()
@@ -36,12 +36,12 @@ class Math::Vector
         @.coordinates.elems;
     }
 
-    our multi sub infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.Dim == $b.Dim }) is export(:DEFAULT) # is tighter(&infix:<+>) (NYI)
+    multi sub infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.Dim == $b.Dim }) is export(:DEFAULT) # is tighter(&infix:<+>) (NYI)
     {
         [+]($a.coordinates »*« $b.coordinates);
     }
 
-    our multi sub infix:<dot>(Math::Vector $a, Math::Vector $b) is export(:DEFAULT)
+    multi sub infix:<dot>(Math::Vector $a, Math::Vector $b) is export(:DEFAULT)
     {
         $a ⋅ $b;
     }
