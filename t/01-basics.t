@@ -112,16 +112,16 @@ for ($v5, $v6) X ($v5, $v6) -> $x, $y
 dies_ok( { $v5 ⋅ $v7 }, "You can't do dot products of different dimensions");
 dies_ok( { $v7 dot $v5 }, "You can't do dot products of different dimensions");
 
-# {
-#     my $a = $v1;
-#     $a ⋅= $v2;
-#     is_approx($v1 ⋅ $v2, $a, "⋅= works");
-# }
+{
+    my $a = $v1;
+    $a ⋅= $v2;
+    is_approx($v1 ⋅ $v2, $a, "⋅= works");
+}
 
-# {
-#     my Math::Vector $a = $v1;
-#     dies_ok( { $a ⋅= $v2; }, "You can't do dot= on a Math::Vector variable");
-# }
+{
+    my Math::Vector $a = $v1;
+    dies_ok( { $a ⋅= $v2; }, "You can't do dot= on a Math::Vector variable");
+}
 
 #cross product tests
 is(~($v1 × $v2), "(-12, 9, -2)", "Basic cross product works");
@@ -152,28 +152,29 @@ dies_ok( { $v5 × $v6 }, "You can't do 5D cross products");
 dies_ok( { $v1 cross $v7 }, "You can't do cross products of different dimensions");
 dies_ok( { $v5 cross $v6 }, "You can't do 5D cross products");
 
-# {
-#     my $a = $v1;
-#     $a ×= $v2;
-#     is_approx($v1 × $v2, $a, "×= works");
-# }
+{
+    my $a = $v1;
+    $a ×= $v2;
+    is_approx_vector($v1 × $v2, $a, "×= works");
+}
 
 # Math::UnitVector tests
-# {
-#     my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
-#     isa_ok($a, Math::Vector, "Variable is of type Math::Vector");
-# }
+{
+    my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
+    isa_ok($a, Math::Vector, "Variable is of type Math::Vector");
+}
 
-# {
-#     my Math::UnitVector $a = Math::UnitVector.new(1, 0, 0);
-#     my $b = $a;
-#     $b += $v2;
-#     is_approx($a + $v2, $b, "+= works on Math::UnitVector");
-# }
-# {
-#     my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
-#     dies_ok( { $a += $v2; }, "Catch if += violates the Math::UnitVector constraint");
-# }
+{
+    my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
+    my $b = $a;
+    $b += $v2;
+    is_approx_vector($a + $v2, $b, "+= works on Math::UnitVector");
+}
+
+{
+    my Math::UnitVector $a = Math::Vector.new(1, 0, 0);
+    dies_ok( { $a += $v2; }, "Catch if += violates the Math::UnitVector constraint");
+}
 
 # test prefix plus
 # isa_ok(+$v1, Math::Vector, "Prefix + works on the Math::Vector class");
