@@ -13,9 +13,10 @@ my Math::Vector $v7 = Math::Vector.new(1,0,0,0,0,0,0);
 my Math::Vector $v8 = Math::Vector.new(0,1,0,0,0,0,0);
 my Math::Vector $v9 = Math::Vector.new(1..7);
 my Math::Vector $v10 = Math::Vector.new(10,20,1,10,20,10,30);
+my Math::Vector $v11 = Math::Vector.new(i,1+i);
 my Math::Vector $vcrazy = Math::Vector.new(Math::Vector.new(1, 2, 3), Math::Vector.new(-1, 0, -1));
 
-my @vectors = ($v1, $v2, $v3, $origin3d, $v5, $v6, $v7, $v8, $v9, $v10);
+my @vectors = ($v1, $v2, $v3, $origin3d, $v5, $v6, $v7, $v8, $v9, $v10, $v11);
 
 isa_ok($v1, Math::Vector, "Variable is of type Math::Vector");
 isa_ok($v2, Math::Vector, "Variable is of type Math::Vector");
@@ -34,12 +35,13 @@ is(~eval($v1.perl), ~$v1, ".perl works");
 is(~eval($v9.perl), ~$v9, ".perl works");
 is(~eval($vcrazy.perl), ~$vcrazy, ".perl works");
 
+is $v11.conj, Math::Vector.new(0-i,1-i), ".conj works";
+
 is($v1.Dim, 3, "Dim works for 3D Math::Vector");
 is($v5.Dim, 5, "Dim works for 5D Math::Vector");
 is($v7.Dim, 7, "Dim works for 7D Math::Vector");
 
 is_approx($v7 ⋅ $v8, 0, "Perpendicular Math::Vectors have 0 dot product");
-
 
 #basic math tests
 is(~($v1 + $v2), "(4, 6, 3)", "Basic sum works");
@@ -74,8 +76,8 @@ is($v8.Length, 1, "Simple length calculation");
 for @vectors -> $v
 {
     # is_approx($v.Length ** 2, ⎡$v ⎤ * ⎡$v ⎤, "v.Length squared equals ⎡v ⎤ squared");
-    is_approx($v.Length ** 2, $v dot $v, "v.Length squared equals v ⋅ v");
-    # is_approx(abs($v) ** 2, $v ⋅ $v, "abs(v) squared equals v ⋅ v");
+    is_approx($v.Length ** 2, $v dot $v.conj, "v.Length squared equals v ⋅ v.conj");
+    is_approx($v.abs ** 2, $v ⋅ $v.conj, "v.abs squared equals v ⋅ v.conj");
 }
 
 for @vectors -> $v

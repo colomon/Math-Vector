@@ -48,12 +48,17 @@ class Math::Vector
 
     method Length()
     {
-        sqrt(self ⋅ self);
+        sqrt(self ⋅ self.conj);
     }
     
     multi method abs()
     {
         self.Length;
+    }
+
+    multi method conj()
+    {
+        Math::Vector.new(@.coordinates>>.conj);
     }
         
     method Unitize()
