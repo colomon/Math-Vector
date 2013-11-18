@@ -8,12 +8,12 @@ class Math::Vector
     
     multi method new (*@x) 
     {
-        self.bless(*, coordinates => @x);
+        self.bless(coordinates => @x);
     }
     
     multi method new (@x) 
     {
-        self.bless(*, coordinates => @x);
+        self.bless(coordinates => @x);
     }
     
     multi method Str() 
