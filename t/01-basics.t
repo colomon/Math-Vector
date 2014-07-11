@@ -31,9 +31,9 @@ is(~$origin3d, "(0, 0, 0)", "Stringify works");
 is(~$v5, "(1, 2, 3, 4, 5)", "Stringify works");
 is(~$vcrazy, "((1, 2, 3), (-1, 0, -1))", "Stringify works");
 
-is(~eval($v1.perl), ~$v1, ".perl works");
-is(~eval($v9.perl), ~$v9, ".perl works");
-is(~eval($vcrazy.perl), ~$vcrazy, ".perl works");
+is(~EVAL($v1.perl), ~$v1, ".perl works");
+is(~EVAL($v9.perl), ~$v9, ".perl works");
+is(~EVAL($vcrazy.perl), ~$vcrazy, ".perl works");
 
 is $v11.conj, Math::Vector.new(0-i,1-i), ".conj works";
 
@@ -205,7 +205,7 @@ dies_ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 # 
 # my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.coordinates);
 # isa_ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
-# my $vlc = eval($vl.perl);
-# isa_ok($vlc, Math::VectorWithLength, "eval'd perl'd variable is of type Math::VectorWithLength");
+# my $vlc = EVAL($vl.perl);
+# isa_ok($vlc, Math::VectorWithLength, "EVAL'd perl'd variable is of type Math::VectorWithLength");
 
 done;
