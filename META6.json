@@ -1,6 +1,7 @@
 {
     "perl"        : "6.*",
     "name"        : "Math::Vector",
+    "license"     : "Artistic-2.0",
     "version"     : "*",
     "description" : "Vector math class",
     "provides"    : {
