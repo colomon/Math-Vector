@@ -1,13 +1,21 @@
 {
-    "perl"        : "6.*",
-    "name"        : "Math::Vector",
-    "version"     : "0.5.1",
-    "description" : "Vector math class",
-    "provides"    : {
-        "Math::Vector": "lib/Math/Vector.pm"
-    },
-    "depends"     : [],
-    "tags"          : [ "Math" ],   
-    "source-type"   : "git",
-    "source-url"    : "git://github.com/colomon/Math-Vector.git"
+  "name": "Math::Vector",
+  "description": "Vector math class",
+  "version": "0.6.1",
+  "perl": "6.d",
+  "authors": [
+    "librasteve"
+  ],
+  "auth": "zef:librasteve",
+  "depends": [],
+  "provides": {
+    "Math::Vector": "lib/Math/Vector.rakumod"
+  },
+  "license": "Artistic-2.0",
+  "tags": [
+    "Math",
+    "Vector"
+  ],
+  "source-url": "git://github.com/librasteve/Math-Vector.git",
+  "source-type": "git"
 }
